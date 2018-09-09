@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "94f52ca5-aef3-4d62-995d-f679f73af081",
+		"name": "nodejs-poc-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/photos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/photos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/photos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\": \"image1.jpg\",\n\t\"date\": \"2018/09/09\",\n\t\"localisation\": \"Carquefou\",\n\t\"title\": \"Le Housseau\",\n\t\"description\": \"Photo de quartier\",\n\t\"exif\": \"80mm 1.8\",\n\t\"keywords\": \"ville, noir-et-blanc\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/photos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/photos/5b9529ca51e2d025398ba5b2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/photos/5b9529ca51e2d025398ba5b2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"photos",
+						"5b9529ca51e2d025398ba5b2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/photos/5b9539a726f1912f71be7a62",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\": \"image1.jpg\",\n\t\"date\": \"2018/09/09\",\n\t\"localisation\": \"Treillières\",\n\t\"title\": \"Portrait\",\n\t\"description\": \"Portrait d'automne\",\n\t\"exif\": \"80mm 1.8\",\n\t\"keywords\": \"automne\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/photos/5b9539a726f1912f71be7a62",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"photos",
+						"5b9539a726f1912f71be7a62"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/photos/5b95278351e2d025398ba5b1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/photos/5b95278351e2d025398ba5b1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"photos",
+						"5b95278351e2d025398ba5b1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
