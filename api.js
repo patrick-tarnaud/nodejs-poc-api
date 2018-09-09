@@ -11,10 +11,7 @@ let mongoose = require('mongoose')
 
 // création base MongoDB sur mLab
 // db : mongodb://<dbuser>:<dbpassword>@ds151012.mlab.com:51012/photosdb
-// dbuser : admin
-// dbpassword : photosdbpwd1
 
-let connectionDb = 'mongodb://admin:photosdbpwd1@ds151012.mlab.com:51012/photosdb'
 
 mongoose.connect(connectionDb, { useNewUrlParser: true } )
 
@@ -86,10 +83,18 @@ myRouter.route('/photos').post( (req,res) => {
 
 })
 
+/* GET /photos/id */
 myRouter.route('/photos/:id')
 .get(function(req,res){ 
-	  res.json({message : "Lecture photo n°" + req.params.id});
+	Photo.findById(req.params.id, (err, photo) => {
+		if(err) {
+			res.send(err)
+		}
+		res.json(photo)
+		console.log("Lecture photo n°" + req.params.id);		
+	})
 })
+
 .put(function(req,res){ 
 	  res.json({message : "Modification photo n°" + req.params.id});
 })
