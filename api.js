@@ -12,6 +12,7 @@ let mongoose = require('mongoose')
 // création base MongoDB sur mLab
 // db : mongodb://<dbuser>:<dbpassword>@ds151012.mlab.com:51012/photosdb
 
+let connectionDb = 
 
 mongoose.connect(connectionDb, { useNewUrlParser: true } )
 
@@ -58,6 +59,7 @@ myRouter.route('/photos').get( (req,res) => {
 		if (err){
 			res.send(err); 
 		}
+		console.log('Lecture de toutes les photos')
 		res.json(photos);
 	})
 })
@@ -78,33 +80,64 @@ myRouter.route('/photos').post( (req,res) => {
 		if(err) {
 			res.send(err)
 		}
-		res.send('Photo ' + photo.file + ' enregistrée')
+		res.send('Création de la photo ' + photo.file)
 	})
 
 })
 
 /* GET /photos/id */
 myRouter.route('/photos/:id')
-.get(function(req,res){ 
+.get((req,res) => { 
 	Photo.findById(req.params.id, (err, photo) => {
 		if(err) {
 			res.send(err)
 		}
 		res.json(photo)
-		console.log("Lecture photo n°" + req.params.id);		
+		console.log("Lecture de la photo n°" + req.params.id);		
 	})
 })
 
-.put(function(req,res){ 
-	  res.json({message : "Modification photo n°" + req.params.id});
+/* PUT /photos/id */
+myRouter.route('/photos/:id')
+.put((req, res) => {
+	Photo.findById(req.params.id, (err, photo) => {
+		if(err) {
+			res.send(err)
+		}
+
+		photo.file = req.body.file
+		photo.date = req.body.date
+		photo.localisation = req.body.localisation
+		photo.title = req.body.title
+		photo.description = req.body.description
+		photo.exif = req.body.exif
+		photo.keywords = req.body.keywords
+
+		photo.save(photo, (err) => {
+			if(err) {
+				res.send(err)
+			}
+			console.log("Modification photo n°" + req.params.id)
+			res.json(photo)
+		})
+	})
 })
-.delete(function(req,res){ 
-	  res.json({message : "Suppression photo n°" + req.params.id});
-});
+
+/* DELETE /photos/id */
+myRouter.route('/photos/:id')
+.delete((req, res) => {
+	Photo.remove({ _id : req.params.id }, (err) => {
+		if (err) {
+			res.send(err)
+		}
+		console.log('Suppression photo n°'+ req.params.id)
+		res.send('Suppression de la photo ' + req.params.id)
+	})
+})
 
 app.use(myRouter);  
  
 app.listen(port, hostname, function(){
-	console.log("Serveur démarré sur http://"+ hostname +":"+port); 
+	console.log("Serveur démarré sur http://"+ hostname +":"+port)
 });
  
